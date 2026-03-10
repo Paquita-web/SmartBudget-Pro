@@ -1,0 +1,5 @@
+{
+  "name": "SmartBudget Pro",
+  "description": "Intelligent budget management platform for individuals and businesses with AI-powered categorization, real-time tracking, and advanced financial reporting.",
+  "requestFramePermissions": ["geolocation"]
+}

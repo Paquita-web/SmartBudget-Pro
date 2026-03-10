@@ -1,0 +1,98 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "User account information and preferences",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Firebase Auth UID" },
+        "email": { "type": "string", "format": "email" },
+        "displayName": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "role": { "type": "string", "enum": ["admin", "user"], "description": "Global role" },
+        "activeProfileId": { "type": "string", "description": "Currently selected profile (personal, business, etc.)" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email"]
+    },
+    "Profile": {
+      "title": "Financial Profile",
+      "description": "A container for budgets (Personal, Family, or Business)",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "ownerUid": { "type": "string" },
+        "name": { "type": "string" },
+        "type": { "type": "string", "enum": ["personal", "family", "business"] },
+        "members": { "type": "array", "items": { "type": "string" }, "description": "UIDs of members with access" },
+        "roles": { "type": "object", "description": "Map of UID to role (owner, editor, viewer)" }
+      },
+      "required": ["ownerUid", "name", "type"]
+    },
+    "Budget": {
+      "title": "Monthly Budget",
+      "description": "Budget definition for a specific category and month",
+      "type": "object",
+      "properties": {
+        "profileId": { "type": "string" },
+        "category": { "type": "string" },
+        "amount": { "type": "number" },
+        "month": { "type": "string", "description": "YYYY-MM format" },
+        "alertThreshold": { "type": "number", "description": "Percentage (0-100) to trigger alert" }
+      },
+      "required": ["profileId", "category", "amount", "month"]
+    },
+    "Transaction": {
+      "title": "Transaction",
+      "description": "Income or expense record",
+      "type": "object",
+      "properties": {
+        "profileId": { "type": "string" },
+        "amount": { "type": "number" },
+        "type": { "type": "string", "enum": ["income", "expense"] },
+        "category": { "type": "string" },
+        "description": { "type": "string" },
+        "date": { "type": "string", "format": "date-time" },
+        "isAutoCategorized": { "type": "boolean" },
+        "departmentId": { "type": "string", "description": "Optional for business profiles" },
+        "status": { "type": "string", "enum": ["pending", "approved", "rejected"], "description": "For business approvals" }
+      },
+      "required": ["profileId", "amount", "type", "category", "date"]
+    },
+    "SavingGoal": {
+      "title": "Saving Goal",
+      "description": "Target savings for a specific purpose",
+      "type": "object",
+      "properties": {
+        "profileId": { "type": "string" },
+        "name": { "type": "string" },
+        "targetAmount": { "type": "number" },
+        "currentAmount": { "type": "number" },
+        "deadline": { "type": "string", "format": "date-time" }
+      },
+      "required": ["profileId", "name", "targetAmount"]
+    },
+    "Investment": {
+      "title": "Investment",
+      "description": "Stock or asset investment record",
+      "type": "object",
+      "properties": {
+        "profileId": { "type": "string" },
+        "symbol": { "type": "string" },
+        "name": { "type": "string" },
+        "shares": { "type": "number" },
+        "purchasePrice": { "type": "number" },
+        "currentPrice": { "type": "number" }
+      },
+      "required": ["profileId", "symbol", "name", "shares", "purchasePrice", "currentPrice"]
+    }
+  },
+  "firestore": {
+    "/users/{uid}": { "schema": "User", "description": "User profiles" },
+    "/profiles/{profileId}": { "schema": "Profile", "description": "Financial profiles" },
+    "/profiles/{profileId}/budgets/{budgetId}": { "schema": "Budget", "description": "Budgets per profile" },
+    "/profiles/{profileId}/transactions/{transactionId}": { "schema": "Transaction", "description": "Transactions per profile" },
+    "/profiles/{profileId}/goals/{goalId}": { "schema": "SavingGoal", "description": "Saving goals per profile" },
+    "/profiles/{profileId}/investments/{investmentId}": { "schema": "Investment", "description": "Investments per profile" }
+  }
+}
