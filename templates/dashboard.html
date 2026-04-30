@@ -1,22 +1,47 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-    <!-- Resumen Cards -->
-    <div class="bg-white p-6 rounded-3xl shadow-sm border border-black/5">
-        <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Balance Total</p>
-        <p class="text-3xl font-bold tracking-tighter">12.450€</p>
-        <div class="mt-4 text-[10px] text-green-500 font-bold">+12% vs mes anterior</div>
+<!-- Nueva Sección de Patrimonio -->
+<div class="mb-10 bg-black text-white p-8 rounded-[40px] shadow-2xl relative overflow-hidden group">
+    <div class="absolute top-0 right-0 p-8 opacity-10 group-hover:scale-110 transition-transform duration-700">
+        <div class="w-48 h-48 border-[20px] border-white rounded-full"></div>
     </div>
-    <div class="bg-white p-6 rounded-3xl shadow-sm border border-black/5">
+    
+    <div class="relative z-10">
+        <p class="text-xs font-bold text-gray-400 uppercase tracking-[0.2em] mb-4">Patrimonio Neto Estimado</p>
+        <div class="flex flex-col md:flex-row md:items-end gap-2 md:gap-6">
+            <h2 class="text-5xl md:text-7xl font-bold tracking-tighter">{{ total_assets }}€</h2>
+            <div class="px-3 py-1 bg-emerald-500/20 text-emerald-400 rounded-full text-xs font-bold mb-2 inline-flex items-center gap-1">
+                ↑ Actualizado
+            </div>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10 border-t border-white/10 pt-8">
+            <div>
+                <p class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1">Saldo en Cuentas</p>
+                <p class="text-2xl font-bold tracking-tight">12.450,00€</p>
+            </div>
+            <div>
+                <p class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1">Total Invertido</p>
+                <p class="text-2xl font-bold tracking-tight text-indigo-400">45.000,80€</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+    <!-- Resumen Cards Secundarias -->
+    <div class="bg-white p-6 rounded-3xl shadow-sm border border-black/5 hover:border-black/20 transition-all">
+        <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Ingresos Mes</p>
+        <p class="text-3xl font-bold tracking-tighter text-emerald-600">+2.450€</p>
+    </div>
+    <div class="bg-white p-6 rounded-3xl shadow-sm border border-black/5 hover:border-black/20 transition-all">
         <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Gastos Mes</p>
         <p class="text-3xl font-bold tracking-tighter text-red-500">1.230€</p>
-        <div class="mt-4 text-[10px] text-gray-400 font-bold tracking-widest uppercase">75% del presupuesto</div>
     </div>
-    <div class="bg-white p-6 rounded-3xl shadow-sm border border-black/5">
-        <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Inversiones</p>
-        <p class="text-3xl font-bold tracking-tighter text-indigo-600">45.000€</p>
-        <div class="mt-4 text-[10px] text-indigo-400 font-bold">+2.4k este mes</div>
+    <div class="bg-white p-6 rounded-3xl shadow-sm border border-black/5 hover:border-black/20 transition-all">
+        <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Tasa de Ahorro</p>
+        <p class="text-3xl font-bold tracking-tighter text-black">49,8%</p>
     </div>
 </div>
 
@@ -49,26 +74,23 @@
     </div>
 
     <div class="bg-white p-6 rounded-3xl border border-black/5">
-        <h2 class="text-lg font-bold mb-6">Presupuestos por Categoría</h2>
-        <div class="space-y-6">
-            <div>
-                <div class="flex justify-between text-sm mb-2">
-                    <span class="font-semibold text-gray-600 italic">Ocio y Restaurantes</span>
-                    <span class="font-bold">240€ / 400€</span>
-                </div>
-                <div class="w-full h-2 bg-gray-100 rounded-full overflow-hidden">
-                    <div class="h-full bg-black" style="width: 60%"></div>
-                </div>
-            </div>
-            <div>
-                <div class="flex justify-between text-sm mb-2">
-                    <span class="font-semibold text-gray-600 italic">Alojamiento y Facturas</span>
-                    <span class="font-bold">850€ / 900€</span>
-                </div>
-                <div class="w-full h-2 bg-gray-100 rounded-full overflow-hidden">
-                    <div class="h-full bg-red-500" style="width: 94%"></div>
+        <h2 class="text-lg font-bold mb-6">Actividad Reciente</h2>
+        <div class="space-y-4">
+            {% for log in recent_logs %}
+            <div class="flex items-start gap-4 p-3 hover:bg-gray-50 rounded-2xl transition-colors">
+                <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-xs">👤</div>
+                <div class="flex-grow">
+                    <div class="flex justify-between items-baseline">
+                        <p class="text-xs font-bold text-black">{{ log.action }}</p>
+                        <p class="text-[10px] text-gray-400 font-bold uppercase">{{ log.created_at|date:"d M H:i" }}</p>
+                    </div>
+                    <p class="text-[11px] text-gray-500 italic mt-0.5">{{ log.details }}</p>
+                    <p class="text-[9px] text-gray-400 font-bold uppercase tracking-tight mt-1">Por: {{ log.user.username }}</p>
                 </div>
             </div>
+            {% empty %}
+            <p class="text-sm text-gray-400 text-center py-8 italic">No hay actividad reciente.</p>
+            {% endfor %}
         </div>
     </div>
 </div>

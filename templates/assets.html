@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="mb-10">
+    <h2 class="text-4xl font-bold tracking-tighter mb-2">Desglose de Patrimonio</h2>
+    <p class="text-sm text-gray-500 font-medium italic">Análisis detallado de tus activos, propiedades e inversiones.</p>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <!-- Resumen -->
+    <div class="lg:col-span-1 space-y-6">
+        <div class="bg-black text-white p-8 rounded-[40px] shadow-xl">
+            <p class="text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em] mb-2">Valor Total Estimado</p>
+            <h3 class="text-5xl font-bold tracking-tighter">{{ total_worth }}€</h3>
+            <div class="mt-8 pt-8 border-t border-white/10">
+                <p class="text-xs text-gray-400 leading-relaxed italic">
+                    "Tu libertad financiera depende de la calidad de tus activos, no solo de tus ingresos."
+                </p>
+            </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-3xl border border-black/5">
+            <h4 class="text-xs font-bold uppercase tracking-widest mb-6">Añadir Nuevo Activo</h4>
+            <form class="space-y-4">
+                <div>
+                    <label class="block text-[10px] font-bold text-gray-400 uppercase mb-1">Nombre del Activo</label>
+                    <input type="text" placeholder="Ej: Vivienda Principal" class="w-full bg-gray-50 border border-gray-100 rounded-xl px-4 py-3 text-sm focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-[10px] font-bold text-gray-400 uppercase mb-1">Valor Estimado (€)</label>
+                    <input type="number" placeholder="250000" class="w-full bg-gray-50 border border-gray-100 rounded-xl px-4 py-3 text-sm focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-[10px] font-bold text-gray-400 uppercase mb-1">Categoría</label>
+                    <select class="w-full bg-gray-50 border border-gray-100 rounded-xl px-4 py-3 text-sm focus:outline-none">
+                        <option value="property">Propiedad / Inmueble</option>
+                        <option value="investment">Inversión (Bolsa/Cripto)</option>
+                        <option value="passive_income">Ingreso Pasivo</option>
+                        <option value="cash">Efectivo / Ahorros</option>
+                    </select>
+                </div>
+                <button type="submit" class="w-full bg-black text-white py-4 rounded-2xl text-xs font-bold uppercase tracking-widest hover:bg-gray-900 transition-colors">
+                    Registrar Activo
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Lista -->
+    <div class="lg:col-span-2">
+        <div class="bg-white rounded-[40px] border border-black/5 overflow-hidden shadow-sm">
+            <div class="p-8 border-b border-black/5 flex justify-between items-center">
+                <h4 class="text-lg font-bold">Listado de Activos</h4>
+                <div class="px-4 py-1 bg-gray-100 rounded-full text-[10px] font-bold text-gray-500 uppercase tracking-widest">
+                    {{ assets|length }} Elementos
+                </div>
+            </div>
+            
+            <div class="divide-y divide-black/5">
+                {% for asset in assets %}
+                <div class="p-8 hover:bg-gray-50 transition-colors flex justify-between items-center">
+                    <div class="flex items-center gap-6">
+                        <div class="w-14 h-14 bg-gray-100 rounded-2xl flex items-center justify-center text-2xl">
+                            {% if asset.type == 'property' %}🏠{% elif asset.type == 'investment' %}📈{% elif asset.type == 'passive_income' %}⚙️{% else %}💰{% endif %}
+                        </div>
+                        <div>
+                            <p class="text-lg font-bold tracking-tight">{{ asset.name }}</p>
+                            <p class="text-xs font-bold text-gray-400 uppercase tracking-widest">{{ asset.get_type_display }}</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-xl font-bold tracking-tighter">{{ asset.value }}€</p>
+                        <p class="text-[10px] text-green-500 font-bold uppercase tracking-widest italic">Activo Verificado</p>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="p-20 text-center">
+                    <p class="text-gray-400 italic">No has registrado ningún activo todavía.</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
