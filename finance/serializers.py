@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Transaction, Budget, Goal, Bill, Profile
+from .models import Transaction, Budget, Goal, Bill, Profile, Asset, ActivityLog
 from django.contrib.auth.models import User
 
 class UserSerializer(serializers.ModelSerializer):
