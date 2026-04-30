@@ -21,18 +21,19 @@
 
         <div class="bg-white p-6 rounded-3xl border border-black/5">
             <h4 class="text-xs font-bold uppercase tracking-widest mb-6">Añadir Nuevo Activo</h4>
-            <form class="space-y-4">
+            <form method="POST" action="{% url 'assets_page' %}" class="space-y-4">
+                {% csrf_token %}
                 <div>
                     <label class="block text-[10px] font-bold text-gray-400 uppercase mb-1">Nombre del Activo</label>
-                    <input type="text" placeholder="Ej: Vivienda Principal" class="w-full bg-gray-50 border border-gray-100 rounded-xl px-4 py-3 text-sm focus:outline-none">
+                    <input type="text" name="name" required placeholder="Ej: Vivienda Principal" class="w-full bg-gray-50 border border-gray-100 rounded-xl px-4 py-3 text-sm focus:outline-none">
                 </div>
                 <div>
                     <label class="block text-[10px] font-bold text-gray-400 uppercase mb-1">Valor Estimado (€)</label>
-                    <input type="number" placeholder="250000" class="w-full bg-gray-50 border border-gray-100 rounded-xl px-4 py-3 text-sm focus:outline-none">
+                    <input type="number" name="value" step="0.01" required placeholder="250000" class="w-full bg-gray-50 border border-gray-100 rounded-xl px-4 py-3 text-sm focus:outline-none">
                 </div>
                 <div>
                     <label class="block text-[10px] font-bold text-gray-400 uppercase mb-1">Categoría</label>
-                    <select class="w-full bg-gray-50 border border-gray-100 rounded-xl px-4 py-3 text-sm focus:outline-none">
+                    <select name="type" class="w-full bg-gray-50 border border-gray-100 rounded-xl px-4 py-3 text-sm focus:outline-none">
                         <option value="property">Propiedad / Inmueble</option>
                         <option value="investment">Inversión (Bolsa/Cripto)</option>
                         <option value="passive_income">Ingreso Pasivo</option>

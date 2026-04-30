@@ -2,7 +2,7 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from .views import (
     TransactionViewSet, ProfileViewSet, ActivityLogViewSet, AssetViewSet,
-    dashboard_view, transactions_view, assets_view
+    dashboard_view, transactions_view, assets_view, ai_advisor_view
 )
 
 router = DefaultRouter()
@@ -15,5 +15,6 @@ urlpatterns = [
     path('', dashboard_view, name='home'),
     path('transactions/', transactions_view, name='transactions_page'),
     path('assets/', assets_view, name='assets_page'),
+    path('ai-advisor/', ai_advisor_view, name='ai_advisor'),
     path('api/', include(router.urls)),
 ]

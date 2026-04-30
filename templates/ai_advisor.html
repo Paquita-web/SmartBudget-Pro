@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto">
+    <div class="mb-10 text-center">
+        <div class="inline-flex items-center justify-center w-20 h-20 bg-indigo-600 text-white rounded-3xl shadow-2xl mb-6 text-3xl">✨</div>
+        <h2 class="text-4xl font-bold tracking-tighter mb-2">Asesor Financiero Inteligente</h2>
+        <p class="text-sm text-gray-500 font-medium italic">Gemini analiza tu patrimonio y transacciones para darte el mejor consejo.</p>
+    </div>
+
+    <div class="bg-white p-10 rounded-[40px] border border-black/5 shadow-sm relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-2 h-full bg-indigo-600"></div>
+        
+        <h4 class="text-xs font-bold uppercase tracking-widest text-indigo-600 mb-6">Tu Consejo Personalizado</h4>
+        
+        <div class="prose prose-indigo max-w-none">
+            <p class="text-xl font-medium leading-relaxed text-gray-800 italic">
+                "{{ advice }}"
+            </p>
+        </div>
+
+        <div class="mt-10 pt-8 border-t border-gray-100 flex items-center justify-between">
+            <div class="flex gap-2">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-[10px] font-bold text-gray-500 uppercase">Patrimonio Analizado</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-[10px] font-bold text-gray-500 uppercase">Tiempo Real</span>
+            </div>
+            <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Powered by Google Gemini</p>
+        </div>
+    </div>
+
+    <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-indigo-50 p-6 rounded-3xl border border-indigo-100/50">
+            <h5 class="text-sm font-bold text-indigo-900 mb-2">¿Cómo funciona?</h5>
+            <p class="text-xs text-indigo-700/70 leading-relaxed">
+                La IA revisa tus activos (propiedades, inversiones) y tus últimos gastos para identificar patrones de ahorro y oportunidades de inversión.
+            </p>
+        </div>
+        <div class="bg-gray-50 p-6 rounded-3xl border border-black/5">
+            <h5 class="text-sm font-bold text-gray-900 mb-2">Configuración Local</h5>
+            <p class="text-xs text-gray-500 leading-relaxed">
+                Para que esto funcione en tu PC, pon tu <code class="bg-white px-1 rounded">GEMINI_API_KEY</code> en un archivo <code class="bg-white px-1 rounded">.env</code> antes de ejecutar el servidor.
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}
