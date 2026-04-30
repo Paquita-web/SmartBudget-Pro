@@ -85,6 +85,20 @@
         "currentPrice": { "type": "number" }
       },
       "required": ["profileId", "symbol", "name", "shares", "purchasePrice", "currentPrice"]
+    },
+    "Bill": {
+      "title": "Bill",
+      "description": "Recurring bill or subscription",
+      "type": "object",
+      "properties": {
+        "profileId": { "type": "string" },
+        "name": { "type": "string" },
+        "amount": { "type": "number" },
+        "dueDate": { "type": "number", "minimum": 1, "maximum": 31 },
+        "category": { "type": "string" },
+        "isPaid": { "type": "boolean" }
+      },
+      "required": ["profileId", "name", "amount", "dueDate", "category", "isPaid"]
     }
   },
   "firestore": {
@@ -93,6 +107,7 @@
     "/profiles/{profileId}/budgets/{budgetId}": { "schema": "Budget", "description": "Budgets per profile" },
     "/profiles/{profileId}/transactions/{transactionId}": { "schema": "Transaction", "description": "Transactions per profile" },
     "/profiles/{profileId}/goals/{goalId}": { "schema": "SavingGoal", "description": "Saving goals per profile" },
-    "/profiles/{profileId}/investments/{investmentId}": { "schema": "Investment", "description": "Investments per profile" }
+    "/profiles/{profileId}/investments/{investmentId}": { "schema": "Investment", "description": "Investments per profile" },
+    "/profiles/{profileId}/bills/{billId}": { "schema": "Bill", "description": "Bills and subscriptions per profile" }
   }
 }

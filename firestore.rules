@@ -43,6 +43,16 @@ service cloud.firestore {
              data.currentPrice is number && data.currentPrice >= 0;
     }
 
+    function isValidBill(data) {
+      return hasOnlyAllowedFields(['profileId', 'name', 'amount', 'dueDate', 'category', 'isPaid']) &&
+             data.profileId is string &&
+             data.name is string && data.name.size() > 0 && data.name.size() < 100 &&
+             data.amount is number && data.amount >= 0 &&
+             data.dueDate is number && data.dueDate >= 1 && data.dueDate <= 31 &&
+             data.category is string &&
+             data.isPaid is bool;
+    }
+
     // ===============================================================
     // User Rules
     // ===============================================================
@@ -82,6 +92,13 @@ service cloud.firestore {
         allow read: if isProfileMember(profileId) || isAdmin();
         allow create: if isProfileMember(profileId) && isValidInvestment(request.resource.data);
         allow update: if isProfileMember(profileId) && isValidInvestment(request.resource.data);
+        allow delete: if isProfileMember(profileId);
+      }
+      
+      match /bills/{billId} {
+        allow read: if isProfileMember(profileId) || isAdmin();
+        allow create: if isProfileMember(profileId) && isValidBill(request.resource.data);
+        allow update: if isProfileMember(profileId) && isValidBill(request.resource.data);
         allow delete: if isProfileMember(profileId);
       }
     }
