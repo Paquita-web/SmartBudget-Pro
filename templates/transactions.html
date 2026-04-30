@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="flex justify-between items-end mb-8">
+    <div>
+        <h2 class="text-3xl font-bold tracking-tighter">Transacciones</h2>
+        <p class="text-sm text-gray-500 font-medium italic">Gestiona tus ingresos y gastos en tiempo real</p>
+    </div>
+    <button class="bg-black text-white px-6 py-3 rounded-2xl text-xs font-bold uppercase tracking-widest hover:scale-105 transition-transform">
+        + Añadir Registro
+    </button>
+</div>
+
+<div class="bg-white rounded-3xl border border-black/5 overflow-hidden shadow-sm">
+    <div class="p-6 border-b border-black/5 bg-gray-50/50 flex gap-4">
+        <input type="text" placeholder="Buscar transacción..." class="text-sm bg-white border border-black/5 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black/5 flex-grow">
+        <select class="text-sm bg-white border border-black/5 rounded-xl px-4 py-2">
+            <option>Todas las categorías</option>
+            <option>Alimentación</option>
+            <option>Sueldo</option>
+        </select>
+    </div>
+
+    <table class="w-full text-left">
+        <thead>
+            <tr class="text-[10px] font-bold text-gray-400 uppercase tracking-widest border-b border-black/5">
+                <th class="px-6 py-4">Descripción</th>
+                <th class="px-6 py-4">Categoría</th>
+                <th class="px-6 py-4">Fecha</th>
+                <th class="px-6 py-4 text-right">Cantidad</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-black/5">
+            <!-- Example Data -->
+            <tr class="hover:bg-gray-50/50 transition-colors">
+                <td class="px-6 py-5 font-semibold text-sm italic">Suscripción Netflix</td>
+                <td class="px-6 py-5">
+                    <span class="text-[10px] font-bold text-indigo-500 bg-indigo-50 px-2 py-1 rounded-full uppercase">Ocio</span>
+                </td>
+                <td class="px-6 py-5 text-xs text-gray-500">30 Abr 2024</td>
+                <td class="px-6 py-5 text-right font-bold">-17,99€</td>
+            </tr>
+            <tr class="hover:bg-gray-50/50 transition-colors">
+                <td class="px-6 py-5 font-semibold text-sm italic">Transferencia Bizum</td>
+                <td class="px-6 py-5">
+                    <span class="text-[10px] font-bold text-emerald-500 bg-emerald-50 px-2 py-1 rounded-full uppercase">Ingresos</span>
+                </td>
+                <td class="px-6 py-5 text-xs text-gray-500">29 Abr 2024</td>
+                <td class="px-6 py-5 text-right font-bold text-emerald-600">+15,00€</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+{% endblock %}

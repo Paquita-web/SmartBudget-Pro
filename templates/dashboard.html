@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+    <!-- Resumen Cards -->
+    <div class="bg-white p-6 rounded-3xl shadow-sm border border-black/5">
+        <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Balance Total</p>
+        <p class="text-3xl font-bold tracking-tighter">12.450€</p>
+        <div class="mt-4 text-[10px] text-green-500 font-bold">+12% vs mes anterior</div>
+    </div>
+    <div class="bg-white p-6 rounded-3xl shadow-sm border border-black/5">
+        <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Gastos Mes</p>
+        <p class="text-3xl font-bold tracking-tighter text-red-500">1.230€</p>
+        <div class="mt-4 text-[10px] text-gray-400 font-bold tracking-widest uppercase">75% del presupuesto</div>
+    </div>
+    <div class="bg-white p-6 rounded-3xl shadow-sm border border-black/5">
+        <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Inversiones</p>
+        <p class="text-3xl font-bold tracking-tighter text-indigo-600">45.000€</p>
+        <div class="mt-4 text-[10px] text-indigo-400 font-bold">+2.4k este mes</div>
+    </div>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    <div class="bg-white p-6 rounded-3xl border border-black/5">
+        <h2 class="text-lg font-bold mb-6">Transacciones Recientes</h2>
+        <div class="space-y-4">
+            <div class="flex items-center justify-between p-3 hover:bg-gray-50 rounded-2xl transition-colors">
+                <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 bg-indigo-50 rounded-xl flex items-center justify-center text-indigo-600 font-bold">🛒</div>
+                    <div>
+                        <p class="text-sm font-semibold">Mercadona Supermercado</p>
+                        <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Alimentación</p>
+                    </div>
+                </div>
+                <p class="font-bold">-45,20€</p>
+            </div>
+            <div class="flex items-center justify-between p-3 hover:bg-gray-50 rounded-2xl transition-colors">
+                <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 bg-emerald-50 rounded-xl flex items-center justify-center text-emerald-600 font-bold">💰</div>
+                    <div>
+                        <p class="text-sm font-semibold">Sueldo Mensual</p>
+                        <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Nómina</p>
+                    </div>
+                </div>
+                <p class="text-emerald-600 font-bold">+2.100,00€</p>
+            </div>
+        </div>
+        <a href="/transactions" class="block w-full py-3 mt-6 text-center text-xs font-bold uppercase tracking-widest border border-gray-100 rounded-xl hover:bg-gray-50">Ver todas</a>
+    </div>
+
+    <div class="bg-white p-6 rounded-3xl border border-black/5">
+        <h2 class="text-lg font-bold mb-6">Presupuestos por Categoría</h2>
+        <div class="space-y-6">
+            <div>
+                <div class="flex justify-between text-sm mb-2">
+                    <span class="font-semibold text-gray-600 italic">Ocio y Restaurantes</span>
+                    <span class="font-bold">240€ / 400€</span>
+                </div>
+                <div class="w-full h-2 bg-gray-100 rounded-full overflow-hidden">
+                    <div class="h-full bg-black" style="width: 60%"></div>
+                </div>
+            </div>
+            <div>
+                <div class="flex justify-between text-sm mb-2">
+                    <span class="font-semibold text-gray-600 italic">Alojamiento y Facturas</span>
+                    <span class="font-bold">850€ / 900€</span>
+                </div>
+                <div class="w-full h-2 bg-gray-100 rounded-full overflow-hidden">
+                    <div class="h-full bg-red-500" style="width: 94%"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

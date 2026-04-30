@@ -1,4 +1,4 @@
-# Proyecto Django (Estructura Local)
+# Proyecto Migrado a Django (Estructura Local)
 
 Este proyecto ha sido preparado para que puedas ejecutarlo localmente usando **Django** para el backend y **React** para el frontend.
 
@@ -27,3 +27,6 @@ Este proyecto ha sido preparado para que puedas ejecutarlo localmente usando **D
 ### Notas
 - Para conectarlo totalmente en local, deberás cambiar las llamadas de `Firebase` en `src/App.tsx` por llamadas `fetch` o `axios` a `http://localhost:8000/api/...`.
 - Si prefieres seguir usando Firebase como base de datos en la nube desde Django, he incluido `firebase-admin` en los requisitos.
+
+## Exportar
+Usa el menú **Settings -> Export to GitHub** de AI Studio para llevarte todo este código a tu repositorio personal.

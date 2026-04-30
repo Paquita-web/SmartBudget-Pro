@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinanceApp - Django</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+    <div class="min-h-screen flex flex-col">
+        <!-- Sidebar & Nav simulated for now -->
+        <header class="bg-white border-b border-gray-200 p-4 sticky top-0 z-10">
+            <div class="max-w-7xl mx-auto flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-black rounded-2xl flex items-center justify-center text-white font-bold">F</div>
+                    <h1 class="text-xl font-bold tracking-tight">FinanceApp</h1>
+                </div>
+                <nav class="hidden md:flex items-center gap-6 text-sm font-semibold">
+                    <a href="/" class="text-black">Dashboard</a>
+                    <a href="/transactions" class="text-gray-500 hover:text-black">Transacciones</a>
+                    <a href="#" class="text-gray-500 hover:text-black">Presupuestos</a>
+                </nav>
+                <div class="w-10 h-10 bg-gray-200 rounded-full"></div>
+            </div>
+        </header>
+
+        <main class="flex-grow max-w-7xl mx-auto w-full p-6">
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+</body>
+</html>
